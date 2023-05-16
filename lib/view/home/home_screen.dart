@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/res/constant/app_colors.dart';
+import 'package:todo_app/res/constant/app_strings.dart';
 import 'package:todo_app/view/add_tododialog_widget.dart';
 import 'package:todo_app/view/todo_list_widget.dart';
 
@@ -18,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
       Container(),
     ];
     return Scaffold(
-      appBar: AppBar(title: const Text("Todo App")),
+      appBar: AppBar(title: const Text(AppStrings.appName)),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white.withOpacity(0.7),
-        selectedItemColor: Colors.white,
+        selectedItemColor: AppColors.whiteColor,
         currentIndex: selectedIndex,
         onTap: (value) => setState(() {
           selectedIndex = value;

@@ -1,36 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:todo_app/view/add_tododialog_widget.dart';
 import 'package:todo_app/view/todo_list_widget.dart';
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-
-  @override
-  SplashScreenState createState() => SplashScreenState();
-}
-
-class SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-        const Duration(seconds: 5), //arguments duration and action
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen())));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow,
-      child: FlutterLogo(
-          size: MediaQuery.of(context).size.height / 2,
-          style: FlutterLogoStyle.markOnly),
-    );
-  }
-}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

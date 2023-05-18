@@ -86,11 +86,5 @@ class SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-    /*Container(
-      color: Colors.yellow,
-      child: FlutterLogo(
-        size: MediaQuery.of(context).size.height / 5,
-      ),
-    );*/
   }
 }

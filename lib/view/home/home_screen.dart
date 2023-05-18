@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
 import 'package:todo_app/view/home/components/list_view_separate.dart';
@@ -12,6 +13,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  SharedPreferences? sharedPreferences;
+  List<ToDoModel> toDoModel = [];
+  setInstance()async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    getData();
+
+  }
+  getData({
+    data =sharedPreferences.getStringList("ToDoData");
+
+    for(var mapData in Data!){
+  toDoModel.add(toDoModelFromJson)(mapData));
+  }
+
+    debugPrint(data.toString());
+    debugprint(jsonencode(toDoModel));
+})
   @override
   Widget build(BuildContext context) {
     return SafeArea(

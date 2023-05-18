@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/res/commen/app_text_field.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
@@ -15,6 +18,29 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
   TextEditingController taskEditingController = TextEditingController();
   TextEditingController descriptionEditingController = TextEditingController();
   TextEditingController timeEditingController = TextEditingController();
+
+  SharedPreferences? sharedPreferences;
+  void setInstance() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  }
+
+  setData() {
+    Map<String, dynamic> data = {
+      "task": taskEditingController.text,
+      "description": descriptionEditingController.text,
+      "time": timeEditingController.text,
+    };
+
+    sharedPreferences!.setStringList("ToDoData", [jsonEncode(data)]);
+    Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    setInstance();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -41,48 +67,25 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                 hintText: AppStrings.addDescription,
                 controller: descriptionEditingController,
               ),
-              AppTextField(
-                labelText: AppStrings.addTime,
-                hintText: AppStrings.addTime,
-                controller: timeEditingController,
-                minimax: 1,
-              ),
-              /*  Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 1, color: Colors.black54),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Select Time",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          TimeOfDay? selectTime = await showTimePicker(
-                            initialTime: TimeOfDay.now(),
-                            context: context,
-                          );
-                          if (selectTime != null) {
-                            debugPrint("selectTime.format(context)");
-                          }
-                        },
-                        icon: const Icon(Icons.alarm),
-                      ),
-                    ],
+              TextField(
+                  controller: timeEditingController,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.timer),
+                    labelText: AppStrings.addTime,
+                    hintText: AppStrings.addTime,
                   ),
-                ),
-              ),*/
+                  readOnly: true,
+                  onTap: () async {
+                    TimeOfDay? pickedTime = await showTimePicker(
+                      initialTime: TimeOfDay.now(),
+                      context: context,
+                    );
+                    if (pickedTime != null) {
+                      debugPrint(pickedTime.format(context));
+                    } else {
+                      debugPrint("time is not selected");
+                    }
+                  }),
               SizedBox(
                 height: height / 15,
               ),
@@ -101,7 +104,8 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(width / 10),
-                      side: const BorderSide(width: 1, color: AppColors.black54),
+                      side:
+                          const BorderSide(width: 1, color: AppColors.black54),
                     ),
                   ),
                   child: Text(

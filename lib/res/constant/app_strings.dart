@@ -12,7 +12,7 @@ class AppStrings {
   //Add nd Edit Screen
   static const appTitle = "Add Your Task";
   static const done = "Done";
-  static const addTask = "Add Task";
-  static const addDescription = "Add Description";
-  static const addTime = "Add Time";
+  static const addTask = "Enter Task";
+  static const addDescription = "Enter Description";
+  static const addTime = "Enter Time";
 }

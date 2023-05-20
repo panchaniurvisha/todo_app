@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/res/commen/app_text_field.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
-import 'package:todo_app/view/home/home_screen.dart';
 
 class AddAndEditToDo extends StatefulWidget {
   const AddAndEditToDo({Key? key}) : super(key: key);
@@ -21,7 +20,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
 
   SharedPreferences? sharedPreferences;
   void setInstance() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    sharedPreferences = await SharedPreferences.getInstance();
   }
 
   setData() {
@@ -32,6 +31,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
     };
 
     sharedPreferences!.setStringList("ToDoData", [jsonEncode(data)]);
+    debugPrint("$data");
     Navigator.pop(context);
   }
 
@@ -82,6 +82,8 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                     );
                     if (pickedTime != null) {
                       debugPrint(pickedTime.format(context));
+                      timeEditingController.text = pickedTime.format(context);
+                      setState(() {});
                     } else {
                       debugPrint("time is not selected");
                     }
@@ -94,12 +96,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                 height: height / 15,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
+                    setData();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

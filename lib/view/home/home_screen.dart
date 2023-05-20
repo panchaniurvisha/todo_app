@@ -14,13 +14,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   SharedPreferences? sharedPreferences;
-  List<ToDoModel> toDoModel = [];
-  setInstance()async {
+  //List<ToDoModel> toDoModel = [];
+  /*setInstance()async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     getData();
 
-  }
-  getData({
+  }*/
+  /* getData({
     data =sharedPreferences.getStringList("ToDoData");
 
     for(var mapData in Data!){
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     debugPrint(data.toString());
     debugprint(jsonencode(toDoModel));
-})
+})*/
   @override
   Widget build(BuildContext context) {
     return SafeArea(

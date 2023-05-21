@@ -31,7 +31,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
     };
 
     sharedPreferences!.setStringList("ToDoData", [jsonEncode(data)]);
-    debugPrint("$data");
+    debugPrint("data is set :$data");
     Navigator.pop(context);
   }
 
@@ -47,6 +47,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
           title: const Text(AppStrings.appTitle),

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/model/to_do_model.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
-import 'package:todo_app/view/home/components/list_view_separate.dart';
+import 'package:todo_app/view/home/components/to_do_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,28 +17,43 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   SharedPreferences? sharedPreferences;
-  //List<ToDoModel> toDoModel = [];
-  /*setInstance()async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<ToDoModel> toDoModel = [];
+  setInstance() async {
+    sharedPreferences = await SharedPreferences.getInstance();
     getData();
-
-  }*/
-  /* getData({
-    data =sharedPreferences.getStringList("ToDoData");
-
-    for(var mapData in Data!){
-  toDoModel.add(toDoModelFromJson)(mapData));
   }
 
+  getData() {
+    var data = sharedPreferences!.getStringList("ToDoData");
+
+    for (var mapData in data!) {
+      toDoModel.add(toDoModelFromJson(mapData));
+    }
+
     debugPrint(data.toString());
-    debugprint(jsonencode(toDoModel));
-})*/
+    debugPrint(jsonEncode(toDoModel));
+  }
+
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text(AppStrings.appName)),
-        body: const ListViewSeparate(),
+        body: ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return ToDoTile(
+                description: toDoModel[index].description,
+                task: toDoModel[index].task,
+                time: toDoModel[index].time,
+                count: (index + 1).toString(),
+              );
+            },
+            separatorBuilder: (context, index) => SizedBox(height: height / 80),
+            itemCount: 10),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
           unselectedItemColor: Colors.white.withOpacity(0.7),

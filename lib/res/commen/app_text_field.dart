@@ -7,7 +7,13 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final String labelText;
 
-  AppTextField({Key? key, this.controller, required this.minimax, required this.hintText, required this.labelText}) : super(key: key);
+  AppTextField(
+      {Key? key,
+      this.controller,
+      required this.minimax,
+      required this.hintText,
+      required this.labelText})
+      : super(key: key);
   final TextEditingController referralCodeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,9 @@ class AppTextField extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return TextField(
+      controller: controller,
+      maxLines: minimax,
+      minLines: minimax,
       autofocus: true,
       style: TextStyle(
         color: AppColors.lightGray,
@@ -26,13 +35,15 @@ class AppTextField extends StatelessWidget {
       decoration: InputDecoration(
           counter: Container(),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: width / 140, color: AppColors.grayColor),
+            borderSide:
+                BorderSide(width: width / 140, color: AppColors.grayColor),
             borderRadius: BorderRadius.all(
               Radius.circular(width / 60),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: width / 140, color: AppColors.blueColor),
+            borderSide:
+                BorderSide(width: width / 140, color: AppColors.blueColor),
             borderRadius: BorderRadius.all(
               Radius.circular(width / 60),
             ),

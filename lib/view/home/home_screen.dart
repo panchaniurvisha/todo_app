@@ -49,11 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 description: toDoModel[index].description,
                 task: toDoModel[index].task,
                 time: toDoModel[index].time,
-                count: (index + 1).toString(),
+                count: (index + 1),
               );
             },
             separatorBuilder: (context, index) => SizedBox(height: height / 80),
-            itemCount: 10),
+            itemCount: toDoModel.length),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
           unselectedItemColor: Colors.white.withOpacity(0.7),

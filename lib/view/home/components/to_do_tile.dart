@@ -3,20 +3,14 @@ import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
 import 'package:todo_app/view/add_edit_to_do/add_and_edit_to_do.dart';
 
-class ToDoTile extends StatefulWidget {
+class ToDoTile extends StatelessWidget {
   final String? task;
   final String? description;
   final String? time;
-  final String? count;
+  final int? count;
   const ToDoTile({Key? key, this.task, this.description, this.time, this.count})
       : super(key: key);
 
-  @override
-  State<ToDoTile> createState() => _ToDoTileState();
-}
-
-class _ToDoTileState extends State<ToDoTile> {
-  int index = 0;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -50,7 +44,7 @@ class _ToDoTileState extends State<ToDoTile> {
             width: width / 6,
             child: Center(
               child: Text(
-                (index + 1).toString(),
+                count!.toString(),
                 style: TextStyle(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,

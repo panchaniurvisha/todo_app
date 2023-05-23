@@ -41,12 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void setState(VoidCallback fn) {
-    // TODO: implement setState
-    super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(

@@ -41,6 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -52,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return ToDoTile(
-                description: toDoModel[index].description,
                 task: toDoModel[index].task,
                 time: toDoModel[index].time,
+                description: toDoModel[index].description,
                 count: (index + 1).toString(),
               );
             },

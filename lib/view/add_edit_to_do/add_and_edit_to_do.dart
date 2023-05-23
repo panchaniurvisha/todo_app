@@ -31,7 +31,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
     };
 
     sharedPreferences!.setStringList("ToDoData", [jsonEncode(data)]);
-    debugPrint("data is set :$data");
+    debugPrint("data is set :${jsonEncode(data)}");
     Navigator.pop(context);
   }
 

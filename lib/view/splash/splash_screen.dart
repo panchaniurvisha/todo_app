@@ -64,8 +64,10 @@ class SplashScreenState extends State<SplashScreen> {
                             offset: Offset(-32, -32),
                           )
                         ]),
-                    child: Icon(Icons.download_done_outlined,
-                        size: height / 6, shadows: []),
+                    child: Icon(
+                      Icons.download_done_outlined,
+                      size: height / 6,
+                    ),
                   ),
                 ],
               ),

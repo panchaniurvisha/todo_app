@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/model/to_do_model.dart';
-import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
+import 'package:todo_app/view/add_edit_to_do/add_and_edit_to_do.dart';
 import 'package:todo_app/view/home/components/to_do_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,9 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
     for (var mapData in data!) {
       toDoModel.add(toDoModelFromJson(mapData));
     }
-
     debugPrint(data.toString());
     debugPrint(jsonEncode(toDoModel));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setInstance();
+    super.initState();
   }
 
   @override
@@ -49,24 +55,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 description: toDoModel[index].description,
                 task: toDoModel[index].task,
                 time: toDoModel[index].time,
-                count: (index + 1),
+                count: (index + 1).toString(),
               );
             },
             separatorBuilder: (context, index) => SizedBox(height: height / 80),
             itemCount: toDoModel.length),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Colors.white.withOpacity(0.7),
-          selectedItemColor: AppColors.whiteColor,
-          currentIndex: selectedIndex,
-          onTap: (value) => setState(() {
-            selectedIndex = value;
-          }),
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.fact_check_outlined), label: "Todos"),
-            BottomNavigationBarItem(icon: Icon(Icons.done), label: "Completed")
-          ],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddAndEditToDo(),
+              ),
+            );
+          },
+          child: const Icon(Icons.navigate_next),
         ),
       ),
     );

@@ -7,7 +7,7 @@ class ToDoTile extends StatelessWidget {
   final String? task;
   final String? description;
   final String? time;
-  final int? count;
+  final String? count;
   const ToDoTile({Key? key, this.task, this.description, this.time, this.count})
       : super(key: key);
 
@@ -26,7 +26,6 @@ class ToDoTile extends StatelessWidget {
         color: AppColors.whiteColor,
         boxShadow: const [
           BoxShadow(
-            // spreadRadius: 2,
             color: Colors.black26,
             blurRadius: 10,
             offset: Offset(0, 5),

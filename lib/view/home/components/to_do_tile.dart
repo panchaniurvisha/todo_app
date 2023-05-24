@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
-import 'package:todo_app/view/add_edit_to_do/add_and_edit_to_do.dart';
 
 class ToDoTile extends StatelessWidget {
   final String? task;
   final String? description;
   final String? time;
   final String? count;
-  const ToDoTile({Key? key, this.task, this.description, this.time, this.count})
+  final void Function()? onEdit;
+  final void Function()? onDelete;
+  const ToDoTile(
+      {Key? key,
+      this.task,
+      this.description,
+      this.time,
+      this.count,
+      this.onEdit,
+      this.onDelete})
       : super(key: key);
 
   @override
@@ -98,21 +106,14 @@ class ToDoTile extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-            splashRadius: 1,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AddAndEditToDo(),
-                ),
-              );
-            },
+            splashRadius: 10,
+            onPressed: onEdit,
             icon: const Icon(Icons.drive_file_rename_outline,
                 color: AppColors.amberColor),
           ),
           IconButton(
-            splashRadius: 1,
-            onPressed: () {},
+            splashRadius: 10,
+            onPressed: onDelete,
             icon: const Icon(Icons.delete, color: AppColors.redColor),
           ),
         ],

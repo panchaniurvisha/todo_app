@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/model/to_do_model.dart';
 import 'package:todo_app/res/commen/app_text_field.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
 import 'package:todo_app/res/constant/app_strings.dart';
 
 class AddAndEditToDo extends StatefulWidget {
-  const AddAndEditToDo({Key? key}) : super(key: key);
+  final ToDoModel? toDoModel;
+  final int? index;
+  const AddAndEditToDo({Key? key, this.toDoModel, this.index})
+      : super(key: key);
 
   @override
   State<AddAndEditToDo> createState() => _AddAndEditToDoState();
@@ -19,6 +23,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
   TextEditingController timeEditingController = TextEditingController();
 
   SharedPreferences? sharedPreferences;
+  List<String> toDoList = [];
   void setInstance() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
@@ -29,15 +34,25 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
       "description": descriptionEditingController.text,
       "time": timeEditingController.text,
     };
+    if (widget.toDoModel != null) {
+      toDoList[widget.index!] = (jsonEncode(data));
+    } else {
+      toDoList.add(jsonEncode(data));
+    }
 
-    sharedPreferences!.setStringList("ToDoData", [jsonEncode(data)]);
-    debugPrint("data is set :${jsonEncode(data)}");
+    sharedPreferences!.setStringList("ToDoData", toDoList);
+    debugPrint("data is set :${toDoList}");
     Navigator.pop(context);
   }
 
   @override
   void initState() {
     setInstance();
+    if (widget.toDoModel != null) {
+      taskEditingController.text = widget.toDoModel!.task!;
+      descriptionEditingController.text = widget.toDoModel!.description!;
+      timeEditingController.text = widget.toDoModel!.time!;
+    }
     super.initState();
   }
 

@@ -18,20 +18,36 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   SharedPreferences? sharedPreferences;
   List<ToDoModel> toDoModel = [];
+
   setInstance() async {
     sharedPreferences = await SharedPreferences.getInstance();
     getData();
   }
 
   getData() {
-    var data = sharedPreferences!.getStringList("ToDoData");
+    toDoModel = [];
+    if (sharedPreferences!.containsKey("ToDoData")) {
+      var data = sharedPreferences!.getStringList("ToDoData");
 
-    for (var mapData in data!) {
-      toDoModel.add(toDoModelFromJson(mapData));
+      for (var mapData in data!) {
+        toDoModel.add(toDoModelFromJson(mapData));
+      }
+      debugPrint("data is get:==>${data.toString()}");
+      debugPrint(jsonEncode(toDoModel));
+      setState(() {});
+    } else {
+      debugPrint("No Data Found=====>");
     }
-    setState(() {});
-    debugPrint("data is get:==>${data.toString()}");
-    debugPrint(jsonEncode(toDoModel));
+  }
+
+  setData() {
+    List<String> listData = [];
+    for (var mapData in toDoModel) {
+      listData.add(jsonEncode(mapData));
+    }
+
+    sharedPreferences!.setStringList("ToDoData", listData);
+    debugPrint("data is set :$listData");
   }
 
   @override
@@ -47,28 +63,50 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text(AppStrings.appName)),
-        body: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ToDoTile(
-                task: toDoModel[index].task,
-                time: toDoModel[index].time,
-                description: toDoModel[index].description,
-                count: (index + 1).toString(),
-              );
-            },
-            separatorBuilder: (context, index) => SizedBox(height: height / 80),
-            itemCount: toDoModel.length),
+        body: toDoModel.isEmpty
+            ? Center(
+                child: Text(
+                  "No Data Found",
+                  style: TextStyle(
+                      fontSize: height / 20, fontWeight: FontWeight.bold),
+                ),
+              )
+            : ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return ToDoTile(
+                    task: toDoModel[index].task,
+                    time: toDoModel[index].time,
+                    description: toDoModel[index].description,
+                    count: (index + 1).toString(),
+                    onEdit: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddAndEditToDo(index: index),
+                        ),
+                      ).then((value) => getData());
+                    },
+                    onDelete: () {
+                      toDoModel.removeAt(index);
+                      setState(() {});
+                      setData();
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) =>
+                    SizedBox(height: height / 80),
+                itemCount: toDoModel.length),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddAndEditToDo(),
+                builder: (context) => AddAndEditToDo(),
               ),
-            );
+            ).then((value) => getData());
           },
           child: const Icon(Icons.navigate_next),
         ),

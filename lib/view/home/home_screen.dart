@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     for (var mapData in data!) {
       toDoModel.add(toDoModelFromJson(mapData));
     }
+    setState(() {});
     debugPrint("data is get:==>${data.toString()}");
     debugPrint(jsonEncode(toDoModel));
   }

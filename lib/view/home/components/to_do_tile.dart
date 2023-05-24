@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
-import 'package:todo_app/res/constant/app_strings.dart';
 import 'package:todo_app/view/add_edit_to_do/add_and_edit_to_do.dart';
 
 class ToDoTile extends StatelessWidget {
@@ -43,7 +42,7 @@ class ToDoTile extends StatelessWidget {
             width: width / 6,
             child: Center(
               child: Text(
-                count!.toString(),
+                count ?? "",
                 style: TextStyle(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,
@@ -59,7 +58,7 @@ class ToDoTile extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppStrings.title,
+                    task ?? "",
                     style: TextStyle(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w600,
@@ -78,7 +77,7 @@ class ToDoTile extends StatelessWidget {
                     width: width / 60,
                   ),
                   Text(
-                    AppStrings.time,
+                    time ?? "",
                     style: TextStyle(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w600,
@@ -88,7 +87,7 @@ class ToDoTile extends StatelessWidget {
                 ],
               ),
               Text(
-                AppStrings.description,
+                description ?? "",
                 style: TextStyle(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,

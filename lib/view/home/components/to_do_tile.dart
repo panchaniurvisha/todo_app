@@ -24,8 +24,6 @@ class ToDoTile extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin:
-          EdgeInsets.symmetric(horizontal: width / 20, vertical: height / 70),
       clipBehavior: Clip.antiAlias,
       height: height / 15,
       decoration: BoxDecoration(
@@ -70,7 +68,7 @@ class ToDoTile extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: height / 45,
+                      fontSize: height / 55,
                     ),
                   ),
                   SizedBox(
@@ -89,7 +87,7 @@ class ToDoTile extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: height / 45,
+                      fontSize: height / 55,
                     ),
                   ),
                 ],
@@ -99,7 +97,7 @@ class ToDoTile extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,
-                  fontSize: height / 42,
+                  fontSize: height / 50,
                 ),
               ),
             ],

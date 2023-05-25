@@ -60,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text(AppStrings.appName)),
@@ -72,6 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               )
             : ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: width / 25)
+                    .copyWith(top: height / 40),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
@@ -85,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AddAndEditToDo(index: index),
+                          builder: (context) => AddAndEditToDo(
+                              index: index, toDoModel: toDoModel[index]),
                         ),
                       ).then((value) => getData());
                     },
@@ -97,14 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 separatorBuilder: (context, index) =>
-                    SizedBox(height: height / 80),
+                    SizedBox(height: height / 40),
                 itemCount: toDoModel.length),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddAndEditToDo(),
+                builder: (context) => const AddAndEditToDo(),
               ),
             ).then((value) => getData());
           },

@@ -24,8 +24,19 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
 
   SharedPreferences? sharedPreferences;
   List<String> toDoList = [];
-  void setInstance() async {
+  setInstance() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    getData();
+  }
+
+  getData() {
+    if (sharedPreferences!.containsKey("ToDoData")) {
+      toDoList = sharedPreferences!.getStringList("ToDoData")!;
+      debugPrint("data is get-------->$toDoList");
+      setState(() {});
+    } else {
+      debugPrint("No Data Found=====>");
+    }
   }
 
   setData() {
@@ -41,7 +52,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
     }
 
     sharedPreferences!.setStringList("ToDoData", toDoList);
-    debugPrint("data is set :${toDoList}");
+    debugPrint("data is set :$toDoList");
     Navigator.pop(context);
   }
 
@@ -85,11 +96,27 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
               ),
               TextField(
                   controller: timeEditingController,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.timer),
-                    labelText: AppStrings.addTime,
-                    hintText: AppStrings.addTime,
-                  ),
+                  decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.timer),
+                      labelText: AppStrings.addTime,
+                      hintText: AppStrings.addTime,
+                      counter: Container(),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: width / 140, color: AppColors.grayColor),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(width / 60),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: width / 140, color: AppColors.blueColor),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(width / 60),
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: const Color(0xffFFFFFF)),
                   readOnly: true,
                   onTap: () async {
                     TimeOfDay? pickedTime = await showTimePicker(

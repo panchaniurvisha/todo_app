@@ -83,13 +83,12 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
           child: Column(
             children: [
               AppTextField(
-                minimax: 1,
                 hintText: AppStrings.addTask,
                 labelText: AppStrings.addTask,
                 controller: taskEditingController,
               ),
               AppTextField(
-                minimax: 6,
+                minimax: 5,
                 labelText: AppStrings.addDescription,
                 hintText: AppStrings.addDescription,
                 controller: descriptionEditingController,

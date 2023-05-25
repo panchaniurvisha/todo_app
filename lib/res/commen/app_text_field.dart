@@ -3,14 +3,14 @@ import 'package:todo_app/res/constant/app_colors.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
-  final int minimax;
-  final String hintText;
-  final String labelText;
+  final int? minimax;
+  final String? hintText;
+  final String? labelText;
 
   AppTextField({
     Key? key,
     this.controller,
-    required this.minimax,
+    this.minimax,
     required this.hintText,
     required this.labelText,
   }) : super(key: key);
@@ -21,7 +21,6 @@ class AppTextField extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return TextField(
-      textAlignVertical: TextAlignVertical.top,
       controller: controller,
       maxLines: minimax,
       minLines: minimax,
@@ -52,7 +51,7 @@ class AppTextField extends StatelessWidget {
           labelText: labelText,
           hintText: hintText,
           filled: true,
-          fillColor: const Color(0xffFFFFFF)),
+          fillColor: AppColors.whiteColor),
     );
   }
 }

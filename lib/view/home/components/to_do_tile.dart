@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/res/constant/app_colors.dart';
+import 'package:todo_app/res/constant/app_strings.dart';
 
 class ToDoTile extends StatelessWidget {
   final String? task;
@@ -46,6 +47,7 @@ class ToDoTile extends StatelessWidget {
                 onPressed: (context) => onEdit,
                 backgroundColor: AppColors.materialAppColor,
                 foregroundColor: AppColors.amberColor,
+                label: AppStrings.iconLabelEdit,
                 icon: Icons.drive_file_rename_outline),
           ],
         ),
@@ -56,6 +58,8 @@ class ToDoTile extends StatelessWidget {
                 onPressed: (context) => onDelete,
                 backgroundColor: AppColors.materialAppColor,
                 foregroundColor: AppColors.redColor,
+                flex: 20,
+                label: AppStrings.iconLabelDelete,
                 icon: Icons.delete),
           ],
         ),

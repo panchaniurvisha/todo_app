@@ -10,6 +10,8 @@ class AppStrings {
   static const description = "Description";
 
   //Add nd Edit Screen
+  static const iconLabelDelete = "Delete";
+  static const iconLabelEdit = "Edit";
   static const appTitle = "Add Your Task";
   static const done = "Done";
   static const addTask = "Enter Task";

@@ -22,8 +22,8 @@ class AppTextField extends StatelessWidget {
 
     return TextField(
       controller: controller,
-      maxLines: minimax,
-      minLines: minimax,
+      maxLines: minimax ?? 1,
+      minLines: minimax ?? 1,
       autofocus: true,
       style: TextStyle(
         color: AppColors.lightGray,

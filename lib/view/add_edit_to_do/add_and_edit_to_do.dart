@@ -138,7 +138,11 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                 height: height / 15,
                 child: ElevatedButton(
                   onPressed: () {
-                    setData();
+                    if (taskEditingController.text.isNotEmpty) {
+                      setData();
+                    } else {
+                      debugPrint("no data found");
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

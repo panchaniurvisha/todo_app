@@ -96,7 +96,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
               TextField(
                   controller: timeEditingController,
                   decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.timer),
+                      suffixIcon: const Icon(Icons.timer),
                       labelText: AppStrings.addTime,
                       hintText: AppStrings.addTime,
                       counter: Container(),
@@ -122,6 +122,7 @@ class _AddAndEditToDoState extends State<AddAndEditToDo> {
                       initialTime: TimeOfDay.now(),
                       context: context,
                     );
+
                     if (pickedTime != null) {
                       debugPrint(pickedTime.format(context));
                       timeEditingController.text = pickedTime.format(context);

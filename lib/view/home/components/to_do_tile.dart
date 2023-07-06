@@ -66,7 +66,7 @@ class ToDoTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.grayColor,
               ),
               width: width / 6,

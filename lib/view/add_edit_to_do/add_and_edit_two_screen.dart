@@ -37,6 +37,7 @@ class _AddAndEditTwoScreenState extends State<AddAndEditTwoScreen> {
   void initState() {
     // TODO: implement initState
     if (widget.index != null) {
+      //access property used to widget
       titleController.text = AppConstant.toDoModelList[widget.index!].title!;
       contentController.text =
           AppConstant.toDoModelList[widget.index!].content!;
@@ -180,7 +181,7 @@ class _AddAndEditTwoScreenState extends State<AddAndEditTwoScreen> {
                           );
                           setState(() {});
                         } else {
-                          //add in ToDoModeldata
+                          //add in ToDoModelData
                           AppConstant.toDoModelList.add(
                             ToDoModelData(
                               title: titleController.text,

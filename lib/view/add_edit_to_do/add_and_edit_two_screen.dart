@@ -50,7 +50,7 @@ class _AddAndEditTwoScreenState extends State<AddAndEditTwoScreen> {
     Size size = MediaQuery.of(context).size;
     double screenHeight = size.height;
     double screenWidth = size.width;
-    EdgeInsets devicePadding = MediaQuery.of(context).viewPadding;
+    //EdgeInsets devicePadding = MediaQuery.of(context).viewPadding;
 
     return SafeArea(
       child: Scaffold(
@@ -180,7 +180,7 @@ class _AddAndEditTwoScreenState extends State<AddAndEditTwoScreen> {
                           );
                           setState(() {});
                         } else {
-                          //? To add to-do model in to-doModel list
+                          //add in ToDoModeldata
                           AppConstant.toDoModelList.add(
                             ToDoModelData(
                               title: titleController.text,

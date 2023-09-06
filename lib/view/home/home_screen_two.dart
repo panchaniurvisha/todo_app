@@ -66,6 +66,13 @@ class _HomeScreenTwoState extends State<HomeScreenTwo> {
                             ),
                             Text(
                                 "SubTitle: ${AppConstant.toDoModelList[index].content}"),
+                            Text(
+                              "Time: ${AppConstant.toDoModelList[index].time}",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),

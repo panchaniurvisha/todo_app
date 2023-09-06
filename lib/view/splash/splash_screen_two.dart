@@ -27,7 +27,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo>
       Future.delayed(const Duration(milliseconds: 80), () => isAnimate = true);
 
   navigate() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -42,6 +42,7 @@ class _SplashScreenTwoState extends State<SplashScreenTwo>
     // TODO: implement initState
     navigate();
     fadeInAnimation();
+    // iconAnimation();
     super.initState();
   }
 
@@ -61,20 +62,20 @@ class _SplashScreenTwoState extends State<SplashScreenTwo>
               AnimatedContainer(
                 duration: const Duration(milliseconds: 1500),
                 onEnd: () {},
-                height: isAnimate ? 200 : 40,
+                height: isAnimate ? 10 : 40,
                 width: isAnimate ? 200 : 40,
                 clipBehavior: Clip.antiAlias,
                 curve: Curves.bounceOut,
-                padding: const EdgeInsets.all(15),
+                // padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color:
                       isAnimate ? Colors.blue.withOpacity(0.5) : Colors.white,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Image.asset(
-                  "assets/images/todo.png",
-                  width: 500,
-                  height: 500,
+                  "assets/images/to_do_logo.jpg",
+                  height: 100,
+                  width: 100,
                 ),
               ),
               FadeTransition(
